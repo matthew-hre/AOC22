@@ -1,5 +1,5 @@
 def parse_input() -> list:
-    f = open("input.txt", "r")
+    f = open("day2/input.txt", "r")
     data = f.read()
     f.close()
 
