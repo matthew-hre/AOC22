@@ -28,11 +28,17 @@ def get_input_data(day: int) -> str:
 
 
 class Template:
-    def __init__(self, day: int):
+    def __init__(self, day: int, file_location: str = None):
         """Initializes the template class"""
         self.day = day
         self.link = f"https://adventofcode.com/2022/day/{day}"
-        self.__data = get_input_data(day)
+        if not file_location:
+            self.__data = get_input_data(day)
+        else:
+            f = open(file_location, "r")
+            data = f.read()
+            f.close()
+            self.__data = data
 
     def get_data(self) -> Any:
         """Gets the data for the day
