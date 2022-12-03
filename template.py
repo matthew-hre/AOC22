@@ -1,6 +1,7 @@
 import requests
 from functools import cache
 from typing import Any
+from timeit import default_timer as timer
 
 session = requests.Session()
 
@@ -69,4 +70,35 @@ class Template:
     def __str__(self) -> str:
         """Returns the string representation of the day"""
         newline = "\n"
-        return f"{newline * 50}--- ADVENT OF CODE DAY {self.day} ---\n{self.link}\n\nPart One: {self.part1()}\nPart Two: {self.part2()}"
+        return f"{newline * 50}{bcolors.BOLD}  -=-=- {bcolors.OKGREEN}ADVENT {bcolors.FAIL}OF {bcolors.OKGREEN}CODE {bcolors.FAIL}DAY {bcolors.OKGREEN}{self.day}{bcolors.ENDC}{bcolors.BOLD} -=-=-{bcolors.ENDC}\n{bcolors.UNDERLINE}{bcolors.OKCYAN}{self.link}{bcolors.ENDC}\n\n{self.get_part1_timing()}\n{self.get_part2_timing()}{newline}"
+
+    def get_part1_timing(self) -> str:
+        """Returns the time taken to run part 1"""
+        start = timer()
+        result = self.part1()
+        end = timer()
+        return f"{bcolors.BOLD}Part One:{bcolors.ENDC} {bcolors.OKGREEN}{result}{bcolors.ENDC} ({bcolors.OKCYAN}{end - start:.7f}{bcolors.ENDC} seconds)"
+
+    def get_part2_timing(self) -> str:
+        """Returns the time taken to run part 2"""
+        start = timer()
+        result = self.part2()
+        end = timer()
+        return f"{bcolors.BOLD}Part Two:{bcolors.ENDC} {bcolors.OKGREEN}{result}{bcolors.ENDC} ({bcolors.OKCYAN}{end - start:.7f}{bcolors.ENDC} seconds)"
+
+    def get_total_timing(self) -> float:
+        """Returns the time taken to run both parts"""
+        return self.get_part1_timing() + self.get_part2_timing()
+
+
+# from https://stackoverflow.com/questions/287871/how-do-i-print-colored-text-to-the-terminal
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
