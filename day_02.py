@@ -1,7 +1,7 @@
 from template import Template
 
 
-class Day2(Template):
+class Day_02(Template):
     def __init__(self):
         self.day = 2
         super().__init__(self.day)
@@ -67,4 +67,4 @@ class Day2(Template):
         return score
 
 
-print(Day2())
+print(Day_02())

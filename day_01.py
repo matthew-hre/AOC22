@@ -1,7 +1,7 @@
 from template import Template
 
 
-class Day1(Template):
+class Day_01(Template):
     def __init__(self):
         self.day = 1
         super().__init__(self.day)
@@ -23,4 +23,4 @@ class Day1(Template):
         return total
 
 
-print(Day1())
+print(Day_01())
