@@ -1,14 +1,15 @@
+import base64
 import requests
 from functools import cache
 from typing import Any
 from timeit import default_timer as timer
 
-session = requests.Session()
+import constants
+cookie = constants.COOKIE
+api_client_id = constants.API_CLIENT_ID
+api_secret = constants.API_SECRET
 
-# i just downloaded this manually lol
-cookie_file = open("cookie.txt", "r")
-cookie = cookie_file.read().strip()
-cookie_file.close()
+session = requests.Session()
 
 # ensures the site gives us the correct data, and not just a lame "you're not logged in" reponse
 requests.utils.add_dict_to_cookiejar(session.cookies, {"session": cookie})
@@ -25,7 +26,7 @@ def get_input_data(day: int) -> str:
         str: The unparsed input data
     """
     url = f"https://adventofcode.com/2022/day/{day}/input"
-    return session.get(url).text.strip()
+    return session.get(url).text
 
 
 class Template:
@@ -89,6 +90,21 @@ class Template:
     def get_total_timing(self) -> float:
         """Returns the time taken to run both parts"""
         return self.get_part1_timing() + self.get_part2_timing()
+
+    # def post_to_linkedin(self) -> float:
+    #     UPLOAD_URL = 'https://api.linkedin.com/media/upload'
+    #     IMAGE_PATH = "C:/Users/matthew_hre/Desktop/code.png"
+    #     DESCRIPTION = f'A code solution for day {self.day} of Advent of Code 2022'
+
+    #     with open(IMAGE_PATH, 'rb') as image_file:
+    #         image_data = image_file.read()
+    #         image_base64 = base64.b64encode(image_data).decode()
+
+    #     headers = {
+    #         'Authorization': f'Bearer {api_secret}',
+    #         'Content-Type': 'application/octet-stream',
+    #         'X-Restli-Protocol-Version': '2.0.0',
+    #     }
 
 
 # from https://stackoverflow.com/questions/287871/how-do-i-print-colored-text-to-the-terminal

@@ -4,7 +4,7 @@ from template import Template
 class Day_04(Template):
     def __init__(self):
         self.day = 4
-        super().__init__(self.day, "test.txt")
+        super().__init__(self.day)
 
         self.set_data([[list(map(int, y.split("-"))) for y in x.split(",")]
                       for x in self.get_data().split()])
