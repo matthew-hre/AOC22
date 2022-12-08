@@ -17,7 +17,8 @@ class Folder:
             self.parent.set_size(size)
 
     def print_tree(self, level=0):
-        print("    " * level + self.name + ": " + str(self.size))
+        print("  " * level + "/" + self.name +
+              ": " + str(self.size) + " bytes")
         for sub in self.sub_folders:
             sub.print_tree(level + 1)
 
@@ -52,7 +53,7 @@ class Day_07(Template):
     def __init__(self):
         self.day = 7
         super().__init__(self.day)
-        # set the location to ./day_07
+
         self.location = Folder("/", None)
         self.root = self.location
 
